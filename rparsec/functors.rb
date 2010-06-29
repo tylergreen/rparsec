@@ -103,11 +103,8 @@ module Functors
   def uncurry(&block)
     return block unless block.arity == 1
     proc do |*args|
-      result = block
-      args.each do |a|
-        result = result.call(a)
-      end
-      result
+      last = args.inject{ |x, a| block.call(x) ; a }
+      block.call(last)
     end
   end
   

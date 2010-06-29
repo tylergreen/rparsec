@@ -129,14 +129,6 @@ module Functors
   # 
   def repeat(n, &block)
     proc do |*args|
-      result = nil
-      n.times {result = block.call(*args)}
-      result
-    end
-  end
-
-  def repeat(n, &block)
-    proc do |*args|
       (1..n).inject { |_, _| block.call(*args) } 
    end
   end

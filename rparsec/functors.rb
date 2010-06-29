@@ -134,6 +134,12 @@ module Functors
       result
     end
   end
+
+  def repeat(n, &block)
+    proc do |*args|
+      (1..n).inject { |_, _| block.call(*args) } 
+   end
+  end
   
   #
   # Create a Proc, when called,
